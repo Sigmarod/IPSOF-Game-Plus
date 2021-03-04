@@ -39,8 +39,11 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        
-            if (mov.enabled && scorebl)
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
+        if (mov.enabled && scorebl)
             {
                 Invoke("scoreplus", 0.1f);
                 scorebl = false;
@@ -51,11 +54,11 @@ public class GameManager : MonoBehaviour
                 scoreText2.text = score.ToString();
             }
 
-            if (creditsUI.active)
+            if (creditsUI.activeSelf)
             {
                 if (Input.GetKey("space"))
                 {
-                    SceneManager.LoadScene(1);
+                    this.Restart();
                     gameHasEnded = false;
                     score = 0;
                     mov.enabled = true;
@@ -64,6 +67,17 @@ public class GameManager : MonoBehaviour
             }
         
         
+    }
+
+    public void Restart()
+    {
+        int y = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(y);
+        SceneManager.LoadScene(y);
+        this.gameHasEnded = false;
+        this.score = 0;
+        mov.enabled = true;
+
     }
 
     void scoreplus()

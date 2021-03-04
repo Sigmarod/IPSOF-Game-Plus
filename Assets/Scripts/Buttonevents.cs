@@ -49,7 +49,9 @@ public class Buttonevents : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(1);
+        int y = SceneManager.GetActiveScene().buildIndex;
+        Debug.Log(y);
+        SceneManager.LoadScene(y);
         gm.gameHasEnded = false;
         gm.score = 0;
         mov.enabled = true;
